@@ -1,5 +1,7 @@
 package com.vendingmachine.app;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.vendingmachine.exception.NoCoinsInsertedException;
@@ -10,11 +12,11 @@ import com.vendingmachine.model.Snack;
 import com.vendingmachine.service.CoinService;
 import com.vendingmachine.service.SnackService;
 
-public class VendingMachineImp implements VendingMachineInterface {
+public class SnackMachineImp implements SnackMachineInterface {
 
     // CoinService, SnackService : singleton classes to allow making only one instance of each
 	
-	public VendingMachineImp() {
+	public SnackMachineImp() {
 		initilaizer();
 	}
 	
@@ -99,7 +101,7 @@ public class VendingMachineImp implements VendingMachineInterface {
 	 * pickup Snack and cash out from inserted money
 	 * will clear inserted money variable after cash out and returning money back 
 	 * @exceptions : not enough money inserted 
-	 * @return : double value of many back amount to user
+	 * @return : double value of money back amount 
 	 */
 	@Override
 	public double pickupSnackReturnExtraMoney(Code code) {
@@ -129,6 +131,30 @@ public class VendingMachineImp implements VendingMachineInterface {
 	public void reset() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public static String getInsertedMoney() {
+		return String.format("%.2f", CoinService.getInstance().getMoneyInserted());
+	}
+	
+	public static String printMachine() {
+		Iterator<Snack> iterator = SnackService.getInstance().getSnackList().iterator();
+		String output = "";
+		int i =1;
+		while(iterator.hasNext()) {
+			Snack snack =iterator.next();
+			if(i%5==0) {
+				output+="\n";
+				output+=snack.getCode()+"("+snack.getPrice()+")";
+			}else {
+				output+=snack.getCode()+"("+snack.getPrice()+")";
+			}
+			i++;
+		}
+		output+="\n moneyInserted="+String.format("%.2f", CoinService.getInstance().getMoneyInserted())+"$";
+		output+="\n MachineMoneyStorege="+String.format("%.2f",CoinService.getInstance().getMoneyStorege())+"$";
+
+		return output;
 	}
 
 	

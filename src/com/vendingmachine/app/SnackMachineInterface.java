@@ -4,7 +4,7 @@ import com.vendingmachine.model.Code;
 import com.vendingmachine.model.Coin;
 import com.vendingmachine.model.Notes;
 
-public interface VendingMachineInterface {
+public interface SnackMachineInterface {
 	
 	// accept 10c, 20c, 50c, 1$
 	public void insertCoins(Coin coins);
