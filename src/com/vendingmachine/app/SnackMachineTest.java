@@ -1,22 +1,19 @@
 package com.vendingmachine.app;
 
-import java.util.List;
 import java.util.Scanner;
-
 import com.vendingmachine.model.Code;
 import com.vendingmachine.model.Coin;
 import com.vendingmachine.model.Notes;
-import com.vendingmachine.model.Snack;
 
 public class SnackMachineTest {
 
 	public static void main(String args[]) {
-		SnackMachineImp vendingMachine = new SnackMachineImp();
+		SnackMachineInterface vendingMachine = new SnackMachineImp();
 		Scanner sc = new Scanner(System.in);	
 		while(true) {
 			System.out.println("==============");
 			System.out.println("snacks on the machine with code and price");
-			System.out.println(SnackMachineImp.printMachine());
+			System.out.println(vendingMachine.printMachine());
 			System.out.println("\n Please insert money using :");
 			System.out.println("1-coin inserter");
 			System.out.println("2-card");
@@ -35,7 +32,7 @@ public class SnackMachineTest {
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
-					System.out.println("moneyInserted="+SnackMachineImp.getInsertedMoney());
+					System.out.println("moneyInserted="+vendingMachine.getInsertedMoney());
 					input = sc.next();
 				}
 				
@@ -44,7 +41,7 @@ public class SnackMachineTest {
 					input = sc.next();
 					double moneyBack = vendingMachine.pickupSnackReturnExtraMoney(Code.valueOf(input));
 					System.out.println("snack "+input+" picked successfully");
-					System.out.println("money back ="+moneyBack);
+					System.out.println("money back ="+moneyBack+"$");
 					
 				}catch(Exception e) {
 					e.printStackTrace();
@@ -56,7 +53,7 @@ public class SnackMachineTest {
 					String input = sc.next();
 					Code code = Code.valueOf(input);
 					vendingMachine.insertCard(code);
-					System.out.println("money Cashed out from card="+SnackMachineImp.getInsertedMoney()+"$");
+					System.out.println("money Cashed out from card="+vendingMachine.getInsertedMoney()+"$");
 
 					double moneyBack = vendingMachine.pickupSnackReturnExtraMoney(code);
 					
@@ -77,6 +74,7 @@ public class SnackMachineTest {
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
+					System.out.println("moneyInserted="+vendingMachine.getInsertedMoney());
 					input = sc.next();
 				}
 				

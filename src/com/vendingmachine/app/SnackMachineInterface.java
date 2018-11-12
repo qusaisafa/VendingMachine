@@ -24,5 +24,9 @@ public interface SnackMachineInterface {
 	// reset machine by admin
 	public void reset();
 	
-
+	// get inserted money by user
+	public String getInsertedMoney();
+	
+	// display available snacks
+	public String printMachine();
 }

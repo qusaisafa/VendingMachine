@@ -133,11 +133,13 @@ public class SnackMachineImp implements SnackMachineInterface {
 		
 	}
 	
-	public static String getInsertedMoney() {
+	@Override
+	public String getInsertedMoney() {
 		return String.format("%.2f", CoinService.getInstance().getMoneyInserted());
 	}
 	
-	public static String printMachine() {
+	@Override
+	public  String printMachine() {
 		Iterator<Snack> iterator = SnackService.getInstance().getSnackList().iterator();
 		String output = "";
 		int i =1;
